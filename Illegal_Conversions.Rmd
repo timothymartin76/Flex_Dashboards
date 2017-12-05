@@ -1,6 +1,6 @@
 ---
 title: "Illegal Conversion Dashboard"
-author: "NYC DOB"
+author: "Timothy Martin"
 output: 
   flexdashboard::flex_dashboard:
     orientation: rows
@@ -390,17 +390,9 @@ Inspection.map$INSPECTIONS = Inspection.map$No.Access  # your new merged column 
 Inspection.map$INSPECTIONS[!is.na(Inspection.map$with.Violations)] = Inspection.map$with.Violations[!is.na(Inspection.map$with.Violations)]  # merge with y
 Inspection.map$INSPECTIONS[!is.na(Inspection.map$No.Violations)] = Inspection.map$No.Violations[!is.na(Inspection.map$No.Violations)]  
 
-### stopped working here Need to find how to add categories to points. 
-map2<- Inspection.map %>% filter(Inspection.map$Inspection.Date  >= today() - days(7))
-##map2<- leaflet(map2) %>% addTiles() %>%
-##addMarkers(~Longitude, ~Latitude, popup = map2$INSPECTIONS, label = ~as.character(Address))
-
-# water_data_df
-##map2$INSPECTIONS <- factor(map2$INSPECTIONS)
-								
+map2<- Inspection.map %>% filter(Inspection.map$Inspection.Date  >= today() - days(7))							
 pal <- colorFactor(c("orange", "green", "red"),
 domain = unique(map2$INSPECTIONS))
-
 
 unique_markers_map2 <- leaflet(map2) %>%
   setView(lng = -73.936176, lat = 40.694526, zoom = 11) %>%
